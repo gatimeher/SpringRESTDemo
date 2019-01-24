@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.request.UserRequest;
@@ -40,6 +41,20 @@ public class UserServicelImpl implements UserService {
         us.setLname(user.getLastName());
         us.setAge(user.getAge());
         us.setCell(user.getCellNumber());
+        return us;
+    }
+
+    public UserResponse getUserById(Long id) throws UserNotFoundException {
+        User user = userRepository.findById(id);
+        UserResponse us = new UserResponse();
+        if (null == user)
+            throw new UserNotFoundException("Not user with id: " + id + " found");
+        else {
+            us.setFname(user.getFirstName());
+            us.setLname(user.getLastName());
+            us.setAge(user.getAge());
+            us.setCell(user.getCellNumber());
+        }
         return us;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.model.User;
 import com.example.demo.request.UserRequest;
 import com.example.demo.response.UserResponse;
@@ -22,6 +23,10 @@ public class UserServicelImpl2 implements UserService {
     }
 
     public UserResponse create(UserRequest user) {
+        return null;
+    }
+
+    public UserResponse getUserById(Long id) throws UserNotFoundException {
         return null;
     }
 }

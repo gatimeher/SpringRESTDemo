@@ -1,6 +1,7 @@
 package com.example.demo.endpoint;
 
 import com.example.demo.request.UserRequest;
+import com.example.demo.response.ExceptionDetail;
 import com.example.demo.response.UserResponse;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
+
+import java.util.Date;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -34,4 +38,12 @@ public class UserEndPoint {
         UserResponse user = userService.create(userRequest);
         return new ResponseEntity<>("User created successfully", HttpStatus.CREATED);
     }
+
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET,
+            produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public HttpEntity<UserResponse> getUserById(@PathVariable Long id) {
+        UserResponse us = userService.getUserById(id);
+        return new ResponseEntity<>(us, HttpStatus.CREATED);
+    }
+
 }
